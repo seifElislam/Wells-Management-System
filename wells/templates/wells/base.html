@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {% block title %} Default title {% endblock %}</title>
+    {% load static %}
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link href="{% static 'wells/base_style.css'%}" rel="stylesheet">
+    <link href="{% static 'wells/colors/default.css'%}" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'wells/img/agiba_icon.jpg'%}">
+    <style>
+        .logout:hover {
+            background-color:green;
+        }
+    </style>
+</head>
+<body class="fix-header">
+<div id="wrapper">
+            <nav class="navbar navbar-default navbar-static-top" style="background-color: dimgrey;color: white;">
+
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right" style="margin-right: 10px;">
+                     <li><label style="line-height: 47px;"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> {{user.username}}</label></li>
+                        <li><a onMouseOver="this.style.color='red'" onMouseOut="this.style.color='white'" href="/logout/" style="color: white;font-weight: 500;"><i class="fa fa-power-off" aria-hidden="true"></i> logout</a></li>
+                 </ul>
+                    </div>
+
+        </nav>
+            <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <div class="navbar-default sidebar" role="navigation" style="max-width: 180px;">
+            <div class="sidebar-nav slimscrollsidebar">
+                <!-- <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                </div> -->
+                <ul class="nav" id="side-menu">
+                    <li style="padding: 70px 0 0;">
+                        <a href="/home/" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                    </li>
+                    <li>
+                        <!-- <a href="profile.html" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a> -->
+                        <a class="waves-effect" data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+                          <i class="fa fa-cog fa-fw" aria-hidden="true"></i>
+                            SETTINGS
+                        </a>
+                        <div  class="collapse sidebar-nav slimscrollsidebar" id="collapseExample">
+                        <ul class="nav" >
+                          <li><a href="/users/" class="waves-effect">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>USERS</a></li>
+                          <li><a href="/fields/" class="waves-effect">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-thumb-tack fa-fw" aria-hidden="true"></i>FIELDS</a></li>
+                            <li><a href="/wells/" class="waves-effect">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>WELLS</a></li>
+                            <!--<li><a href="/schedule/" class="waves-effect">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-calendar fa-fw" aria-hidden="true"></i>SCHEDULE</a></li>-->
+                            <li><a href="/keys/" class="waves-effect">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-key fa-fw" aria-hidden="true"></i>Operations Keys</a></li>
+
+                        </ul>
+                      </div>
+                    </li>
+                    <li>
+                        <a href="/operation/" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Operations</a>
+                    </li>
+                    <li>
+                        <a href="/schedule/" class="waves-effect"><i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>Water Cut Schedule</a>
+                    </li>
+                    <!--<li>-->
+                        <!--<a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Error 404</a>-->
+                    <!--</li>-->
+
+                </ul>
+
+            </div>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+    <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper" style="margin-left: 180px;">
+              <div class="container-fluid">
+                  <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">{% block main %} default{% endblock %}</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                            {% block button %}{% endblock %}
+                        <ol class="breadcrumb">
+                            {% block submain %}{% endblock %}
+
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                  {% block body %} {% endblock %}
+              </div>
+
+            <footer class="footer text-center" style="left: 182px;"> 2017 &copy; AGIBA WELLS MANAGEMENT SOFTWARE</footer>
+        </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>

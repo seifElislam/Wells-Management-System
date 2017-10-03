@@ -1,0 +1,72 @@
+{% extends "wells/base.html" %}
+{% block title %}Wells{% endblock %}
+{% block main %} Operations Keys{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active">Keys</li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <form class="form-inline form-material" action="/keys/" method="post">
+                {%csrf_token%}
+                <div class="row">
+
+                        <div class="col-md-6 col-md-offset-1">
+                        <div class="form-group">
+                            <label >Name :</label>
+                            <div style="display: inline;">
+                                <input type="text"  name="key"
+                                       class="form-control form-control-line"></div>
+                        </div>
+                    </div>
+
+
+                        <div class="col-md-2 col-md-offset-1">
+                        <div class="form-group">
+                            <button class="btn btn-success">Add Operation name</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+                        <h3 class="box-title">OPERATIONS KEYS</h3>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>NAME</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for keys in keys %}
+                    <tr>
+                        <td>{{keys.name}}</td>
+
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No Keys</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

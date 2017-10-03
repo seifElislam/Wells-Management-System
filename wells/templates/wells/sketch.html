@@ -1,0 +1,25 @@
+{% extends "wells/base.html" %}
+{% block title %}Operation sketch{% endblock %}
+{% block main %} {{well.name}}/{{well.field.name}}{% endblock %}
+{% block submain %}
+<li><a href="/operation/{{well.id}}">Well Operations</a></li>
+<!--<li class="">Settings</li>-->
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active"><a href="/wells/{{well.id}}">{{well.name}}</a></li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-xs-6 col-md-12">
+
+                        <img src="{{operation.sketch.url}}" alt="sketch">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

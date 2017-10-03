@@ -1,0 +1,13 @@
+{% extends "wells/base.html" %}
+{% block title %}Home{% endblock %}
+{% block main %} {{user.username}}{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<li class=""><a href="/users/">Users</a></li>
+<li class="active">{{user.username}}</li>
+{% endblock %}
+{% block body %}
+
+{% endblock %}
+{% block javascript %}{% endblock %}

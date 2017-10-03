@@ -1,0 +1,172 @@
+{% extends "wells/base.html" %}
+{% block title %}Wells{% endblock %}
+{% block main %} WELLS{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active">WELLS</li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <!--<h3 class="box-title">Add new user</h3>-->
+            <form class="form-inline form-material" action="/wells/" method="post">
+                {%csrf_token%}
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group ">
+                            <label class="">Field:</label>
+                            <!--<div class="col-sm-12">-->
+                            <select class="form-control form-control-line" name="field">
+                                {% for field in fields %}
+                                <option value="{{field.id}}">{{field.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!--</div>-->
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group  ">
+                            <label class="">Name:</label>
+                            <!--<div class="col-md-12">-->
+                            <input type="text" name="name"
+                                   class="form-control form-control-line">
+                            <!--</div>-->
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group  ">
+                            <label class="">location:</label>
+                            <input type="text" name="location"
+                                   class="form-control form-control-line">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ">
+                        <div class="form-group">
+                            <label class="">Normal w.c value:</label>
+                            <input type="number" step="0.1" name="normal"
+                                   class="form-control form-control-line">
+                        </div>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="form-group ">
+                            <label class="">Status:</label>
+                            <select class="form-control form-control-line" name="status">
+                                <option value="N">Natural flow</option>
+                                <option value="F">Artificial lift</option>
+                                <option value="J">Injection</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group ">
+                            <label class="">Schduale:</label>
+                            <div class="form-control form-control-line">
+                                <input type="date" name="date"
+                                       class="form-control form-control-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3 ">
+                            <div class="form-group">
+                                <label class="">pump type:</label>
+                                <input type="text" name="pump_type"
+                                       class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group ">
+                                <label class="">pump depth:</label>
+                                <input type="number" name="pump_depth"
+                                       class="form-control form-control-line">
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group ">
+                                <label class="">pump configuration:</label>
+                                <div class="form-control form-control-line">
+                                    <input type="text" name="config"
+                                           class="form-control form-control-line"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="form-group">
+                                <button class="btn btn-success">ADD WELL</button>
+                            </div>
+                        </div>
+
+                        <!--</div>-->
+
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="box-title">{{key}}&nbsp;&nbsp;WELLS</h3>
+                </div>
+                <div class="col-md-2 col-md-offset-4">
+                    <form class="form-inline form-material" action="/field/wells/" method="post">
+                        {%csrf_token%}
+
+                        <div class="form-group ">
+                            <label class="">Select Field:&nbsp;</label>
+
+                            <select onchange="this.form.submit()" class="form-control form-control-line" name="field">
+                                <option value="-1" selected="selected">Select</option>
+                                <option value="0">All</option>
+                                {% for field in fields %}
+                                <option value="{{field.id}}">{{field.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>NAME</th>
+                        <th>FIELD</th>
+                        <th>NORMAL VALUE</th>
+                        <th>PUMP TYPE</th>
+                        <th>SCHEDULE</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for well in wells %}
+                    <tr>
+                        <td><a href="/wells/{{well.id}}">{{well.name}}</a></td>
+                        <td>{{well.field.name}}</td>
+                        <td>{{well.normal_value}}</td>
+                        <td>{{well.pump.pump_type}}</td>
+                        <td>{{well.schedule_id.date}}</td>
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No wells</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

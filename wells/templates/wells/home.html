@@ -1,0 +1,42 @@
+{% extends "wells/base.html" %}
+{% block title %}Home{% endblock %}
+{% block main %} DASHBOARD{% endblock %}
+{% block css %}
+<style>
+    .mine{
+        border-style: solid;
+    border-color: skyblue;
+    background-color: skyblue;
+    }
+    .me{
+    font-family: sans-serif;
+    font-size: xx-large;
+    color: chartreuse;
+    }
+
+</style>
+{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class=" col-md-3 ">
+                    <h3 class="me">ACTIVE USERS:&nbsp;<label style="color: dimgrey;">{{no_users}}</label></h3>
+                </div>
+                <div class="col-md-offset-1 col-md-3 ">
+                    <h3 class="me">MAX W.C:&nbsp;<label style="color: dimgrey;">{{value}}</label></h3>
+                </div>
+                <div class="col-md-offset-1 col-md-3 ">
+                    <h3 class="me">TOTAL WELLS:&nbsp;<label style="color: dimgrey;">{{no_wells}}</label></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

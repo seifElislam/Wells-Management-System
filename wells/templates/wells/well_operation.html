@@ -1,0 +1,114 @@
+{% extends "wells/base.html" %}
+{% block title %}WELL OPERATION{% endblock %}
+{% block main %} {{well.name}}/{{well.field.name}}{% endblock %}
+{% block button %}
+     <a href="/operation/{{well.id}}/new/" target="" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Add Operation</a>
+{% endblock %}
+{% block submain %}
+<li><a href="/operation/">Operation</a></li>
+<!--<li class="">Settings</li>-->
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active"><a href="/wells/{{well.id}}">Well {{well.name}}</a></li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="box-title">WELL INFO</h3>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>STATUS</th>
+                        <th>LOCATION</th>
+                        <th>NORMAL VALUE</th>
+                        <th>PUMP TYPE</th>
+                        <th>PUMP DEPTH</th>
+                        <th>PUMP CONFIG.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            {% if well.statues == "F" %}
+                            Artificial lift
+                            {% elif well.statues == "N" %}
+                            Natural flow
+                            {% else %}
+                            Injection
+                            {% endif %}
+                        </td>
+                        <td>{{well.location}}</td>
+                        <td>{{well.normal_value}}</td>
+                        <td>{{well.pump.pump_type}}</td>
+                        <td>{{well.pump.pump_depth}}</td>
+                        <td>{{well.pump.config}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="box-title">WELL OPERATION</h3>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>DATE</th>
+                        <th>KEY</th>
+                        <th>DESCRIPTION</th>
+                        <th>GROSS</th>
+                        <th>NET</th>
+                        <th>GOR</th>
+                        <th>Sep.P</th>
+                        <th>D.F.L</th>
+                        <th>REMARKS</th>
+                        <th>USER</th>
+                        <th>SKETCH</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for operation in operations %}
+                    <tr>
+                        <td>{{operation.date}}</td>
+                        <td>{{operation.operation.name}}</td>
+                        <td>{{operation.description}}</td>
+                        <td>{{operation.performance.gross}}</td>
+                        <td>{{operation.performance.net}}</td>
+                        <td>{{operation.performance.gor}}</td>
+                        <td>{{operation.performance.sep_p}}</td>
+                        <td>{{operation.performance.dfl}}</td>
+                        <td>{{operation.performance.remarks}}</td>
+                        <td>{{operation.user.username}}</td>
+                        <td><a href="/well/{{well.id}}/sketch/{{operation.id}}">sketch</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No Operations</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

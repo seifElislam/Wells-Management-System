@@ -1,0 +1,100 @@
+{% extends "wells/base.html" %}
+{% block title %}Settings{% endblock %}
+{% block main %} Fields{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active">SCHEDULE</li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <!--<h3 class="box-title">Add new user</h3>-->
+            <form class="form-horizontal form-material" action="/schedule/" method="post">
+                {%csrf_token%}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-12">Field</label>
+                            <div class="col-sm-12">
+                                <select class="form-control form-control-line" name="field">
+                                    {% for field in fields %}
+                                    <option value="{{field.id}}">{{field.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="form-group">
+                            <label class="col-md-12">Date</label>
+                            <div class="col-md-12">
+                                <input type="date" name="date"
+                                       class="form-control form-control-line"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <div class="form-group">
+                            <button class="btn btn-success">Select Schedule</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">SYSTEM SCHEDULE</h3>
+            <div class="table-responsive">
+                <form action="/wc/" method="post">
+                    {%csrf_token%}
+                    <div class="col-md-offset-10">
+                        <button class="btn btn-success" type="submit">Save W.C values</button>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+
+                            <th>NAME</th>
+                            <th>FIELD</th>
+                            <th>NORMAL VALUE</th>
+                            <th>SCHEDULE[mm-dd]</th>
+                            <th>CURRENT W.C</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for well in wells %}
+                        <tr style="{%if well.need_check %} background-color: bisque;{%endif%}">
+                            <td><a href="/schedule/{{well.id}}">{{well.name}}</a></td>
+                            <td>{{well.field.name}}</td>
+                            <td>{{well.normal_value}}</td>
+                            <td>{% for schedule in well.schedule_id.all %}
+                                {{ schedule.date }}
+                                <!--<input type="number" hidden name="date" value="{{schedule.date}}">-->
+                                {% endfor %}</td>
+                            <td>
+                                <input type="number" step="0.1" name="w-{{well.id}}">
+                            </td>
+                            <input type="number" hidden step="0.1" value="{{well.normal_value}}" name="n-{{well.id}}">
+
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No wells</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

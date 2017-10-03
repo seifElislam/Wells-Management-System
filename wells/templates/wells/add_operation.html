@@ -1,0 +1,134 @@
+{% extends "wells/base.html" %}
+{% block title %}NEW OPERATION{% endblock %}
+{% block main %} {{well.name}}/{{well.field.name}}{% endblock %}
+{% block css %}
+<style>
+       .table th {
+   text-align: center;
+
+</style>
+
+}
+{% endblock %}
+{% block submain %}
+
+<li><a href="/operation/">Operation</a></li>
+<!--<li class="">Settings</li>-->
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active"><a href="/wells/{{well.id}}">Well {{well.name}}</a></li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <!--<h3 class="box-title">Add new user</h3>-->
+            <form class="form-horizontal form-material" action="/operation/{{well.id}}/new/" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                <div class="form-group">
+                    <label class="col-md-2">Operation Date :</label>
+                    <div class="col-md-4">
+                        <input type="date" name="date" class="form-control form-control-line">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Key :</label>
+                        <div class="col-md-4">
+                            <select class="form-control form-control-line" name="key">
+                                {% for key in keys %}
+                                <option value="{{key.id}}">{{key.name}}</option>
+                                {% endfor %}
+                            </select></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Description :</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control " name="desc" id="example-email" rows="3"></textarea></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2">Well sketch:</label>
+                        <div class="col-md-4">
+                            <input type="file" class="form-control-file" name="sketch">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-12">Performance :</label>
+                        <div class="col-md-12">
+                            <!--<input type="text" placeholder="" name="username" class="form-control form-control-line">-->
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Gross</th>
+                                        <th style="text-align: center;">Net</th>
+                                        <th>GOR</th>
+                                        <th>Sep.P</th>
+                                    </tr>
+
+
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="number" step="0.01" name="gross">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="net">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="gor">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="sep_p">
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                    <thead>
+
+                                    <tr>
+                                        <th>W.C.</th>
+                                        <th>DFL</th>
+                                        <th>Liq %</th>
+                                        <th>Remarks</th>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody>
+
+                                    <tr>
+                                        <td>
+                                            <input type="number" step="0.01" name="wc">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="dfl">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="0.01" name="liq">
+                                        </td>
+                                        <td>
+                                            <input type="text" name="remarks">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-5">
+                            <input type="hidden" name="well_id" value="{{well.id}}">
+                            <button class="btn btn-success">Add operation</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+$('.collapse').collapse()
+{% endblock %}

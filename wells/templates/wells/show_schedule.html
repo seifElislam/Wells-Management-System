@@ -1,0 +1,92 @@
+{% extends "wells/base.html" %}
+{% block title %}Well Info{% endblock %}
+{% block main %} {{well.name}}/{{well.field.name}}{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active"><a href="/wells/">WELLS</a></li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="box-title">WELL {{well.name}} INFO</h3>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>STATUS</th>
+
+                        <th>NORMAL VALUE</th>
+                        <th>PUMP TYPE</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            {% if well.statues == "F" %}
+                            Artificial lift
+                            {% elif well.statues == "N" %}
+                            Natural flow
+                            {% else %}
+                            Injection
+                            {% endif %}
+                        </td>
+
+                        <td>{{well.normal_value}}</td>
+                        <td>{{well.pump.pump_type}}</td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>DATE</th>
+                        <th>W.C Value</th>
+                        <th>USER</th>
+
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in wc_values %}
+                    <tr>
+                        <td>{{value.date}}</td>
+                        <td>{{value.value}}</td>
+                        <td>{{value.user.username}}</td>
+
+
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td>No w.c values</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "wells/base.html" %}
+{% block title %}Settings{% endblock %}
+{% block main %} Fields{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active">Fields</li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <!--<h3 class="box-title">Add new user</h3>-->
+            <form class="form-horizontal form-material" action="/fields/" method="post">
+                {%csrf_token%}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-12">Name</label>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="" name="name"
+                                       class="form-control form-control-line"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-md-offset-1">
+                        <div class="form-group">
+                            <label class="col-md-12">Location</label>
+                            <div class="col-md-12">
+                                <input type="text" placeholder="" name="location"
+                                       class="form-control form-control-line"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        <div class="form-group">
+                            <button class="btn btn-success">Create Field</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+                        <h3 class="box-title">SYSTEM FIELDS</h3>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>NAME</th>
+                        <th>LOCATION</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for field in fields %}
+                            <tr>
+                                <!--<td><a href="/fields/{{field.id}}">{{field.name}}</a></td>-->
+                                <td><a href="/fields/">{{field.name}}</a></td>
+                                <td>{{field.location}}</td>
+
+                            </tr>
+                        {% empty %}
+                           <tr><td>No fields</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

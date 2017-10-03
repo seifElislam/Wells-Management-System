@@ -1,0 +1,76 @@
+{% extends "wells/base.html" %}
+{% block title %}Well Info{% endblock %}
+{% block main %} {{well.name}}/{{well.field.name}}{% endblock %}
+{% block submain %}
+<li><a href="/home/">Dashboard</a></li>
+<li class="">Settings</li>
+<!--<li class=""><a href="/users/">Fields</a></li>-->
+<li class="active"><a href="/wells/">WELLS</a></li>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-4">
+                    <h3 class="box-title">WELL INFO</h3>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+
+                        <th>STATUS</th>
+                        <th>LOCATION</th>
+                        <th>NORMAL VALUE</th>
+                        <th>PUMP TYPE</th>
+                        <th>PUMP DEPTH</th>
+                        <th>PUMP CONFIG.</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            {% if well.statues == "F" %}
+                            Artificial lift
+                            {% elif well.statues == "N" %}
+                            Natural flow
+                            {% else %}
+                            Injection
+                            {% endif %}
+                        </td>
+                        <td>{{well.location}}</td>
+                        <td>{{well.normal_value}}</td>
+                        <td>{{well.pump.pump_type}}</td>
+                        <td>{{well.pump.pump_depth}}</td>
+                        <td>{{well.pump.config}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="white-box">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="btn btn-warning btn-lg btn-block" href="/operation/{{well.id}}" role="button">Well Operations</a>
+                </div>
+                <div class="col-md-6">
+                    <a class="btn btn-success btn-lg btn-block" href="/schedule/{{well.id}}" role="button">Well W.C. Schedule</a>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}{% endblock %}

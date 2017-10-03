@@ -12,6 +12,8 @@ if __name__ == "__main__":
         # exceptions on Python 2.
         try:
             import django
+            # from django.core.management.commands.runserver import Command as runserver
+            # runserver.default_port = "3000"
         except ImportError:
             raise ImportError(
                 "Couldn't import Django. Are you sure it's installed and "
